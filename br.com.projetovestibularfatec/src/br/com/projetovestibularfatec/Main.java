@@ -27,7 +27,7 @@ public class Main {
 			}
 			
 			if(opcao == 2) {
-				
+				ics.editar();
 			}
 			
 			if(opcao == 3) {

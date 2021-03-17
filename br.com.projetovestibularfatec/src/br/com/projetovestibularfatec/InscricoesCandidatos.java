@@ -14,14 +14,17 @@ public class InscricoesCandidatos {
 		System.out.println("Informe o seu nome:");
 		String nome = scan.next();
 		inscricaoCandidato.setNome(nome);
+		
 		System.out.println("Informe o seu CPF:");
 		String cpf = scan.next();
 		inscricaoCandidato.setCpf(cpf);
+		
 		System.out.println("Informe o numero do curso: Ex: 1. Sistemas para Internet ou 2. Gestão Empresarial");
 		int resul = scan.nextInt();
 		boolean cursoEscolhido = whatCurso(resul);
 		OpcaoCursos curso = cursoEscolhido ? OpcaoCursos.SISTEMAS_PARA_INTERNET : OpcaoCursos.GESTAO_EMPRESARIAL;
 		inscricaoCandidato.setOpcao(curso);
+		
 		inscricaoCandidato.setSituacao(SituacaoInscricao.EM_DIVIDA);
 		candidatos.add(inscricaoCandidato);
 		System.out.println("======================================");
@@ -33,9 +36,29 @@ public class InscricoesCandidatos {
 		return resul == 1 ? true : false;
 	}
 	
-//	public InscricaoCandidato editar(InscricaoCandidato candidato) {
-//		System.out.println("Informe o Codigo");
-//	}
+	public void editar() {
+		System.out.println("Informe o numero da sua inscrição:");
+		int numero = scan.nextInt();
+		InscricaoCandidato candidatoValidado = validarInscricao(numero);
+		if(candidatoValidado != null) {
+			System.out.println("Novo nome:");
+			String nomeEdit = scan.next();
+			candidatoValidado.setNome(nomeEdit);
+			
+			System.out.println("Novo CPF:");
+			String cpfEdit = scan.next();
+			candidatoValidado.setCpf(cpfEdit);
+			
+			System.out.println("Nova opção de curso: Ex: 1. Sistemas para Internet ou 2. Gestão Empresarial");
+			int cursoEdit = scan.nextInt();
+			boolean cursoEscolhido = whatCurso(cursoEdit);
+			OpcaoCursos curso = cursoEscolhido ? OpcaoCursos.SISTEMAS_PARA_INTERNET : OpcaoCursos.GESTAO_EMPRESARIAL;
+			candidatoValidado.setOpcao(curso);
+			returnEdit();
+		}else {
+			returnElse();
+		}
+	}
 	
 	public void listar() {
 		System.out.println("Informe o numero da sua inscrição:");
@@ -80,6 +103,12 @@ public class InscricoesCandidatos {
 	public void returnElse() {
 		System.out.println("==========================================");
 		System.out.println("Informe um numero de inscrição valido!!");
+		System.out.println("==========================================");
+	}
+	
+	public void returnEdit() {
+		System.out.println("==========================================");
+		System.out.println("Informações editadas com sucesso!!");
 		System.out.println("==========================================");
 	}
 	
