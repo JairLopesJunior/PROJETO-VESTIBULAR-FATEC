@@ -7,6 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		InscricoesCandidatos ics = new InscricoesCandidatos();
+		Aplicadores aplicadores = new Aplicadores();
 		int opcao;
 		int numeroInscricao = 1;
 		
@@ -18,6 +19,7 @@ public class Main {
 			System.out.println("2. Editar Inscrição:");
 			System.out.println("3. Listar Candidato:");
 			System.out.println("4. Pagar boleto da Inscrição:");
+			System.out.println("5. Cadastrar aplicadores das provas:");
 			System.out.println("0. SAIR");
 			opcao = scan.nextInt();
 			
@@ -36,6 +38,11 @@ public class Main {
 			
 			if(opcao == 4) {
 				ics.pagarBoleto();
+			}
+			
+			if(opcao == 5) {
+				Aplicador aplicador = new Aplicador();
+				aplicadores.save(aplicador);
 			}
 			
 		}while(opcao != 0); {
