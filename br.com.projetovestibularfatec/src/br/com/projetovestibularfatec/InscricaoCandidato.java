@@ -9,7 +9,7 @@ public class InscricaoCandidato {
 	private SituacaoInscricao situacao;
 	
 	public InscricaoCandidato(int numeroInscricao) {
-		this.numeroInscricao = numeroInscricao++;
+		this.numeroInscricao = numeroInscricao;
 	}
 	
 	public int getNumeroInscricao() {
