@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class InscricoesCandidatos {
 
 	List<InscricaoCandidato> candidatos = new ArrayList<>();
-	
 	Scanner scan = new Scanner(System.in);
+	int numeroCandidatos = 0;
 	
 	public void save(InscricaoCandidato inscricaoCandidato) {
 		System.out.println("Informe o seu nome:");
@@ -32,7 +32,7 @@ public class InscricoesCandidatos {
 		System.out.println("======================================");
 	}
 	
-	public boolean whatCurso(int resul){
+	private boolean whatCurso(int resul){
 		return resul == 1 ? true : false;
 	}
 	
@@ -71,9 +71,16 @@ public class InscricoesCandidatos {
 			System.out.println("CPF: " + candidatoValidado.getCpf());
 			System.out.println("Curso: " + candidatoValidado.getOpcao());
 			System.out.println("Situação do Pagamento: " + candidatoValidado.getSituacao());
+			getNumeroSala(candidatoValidado);
 			System.out.println("==========================================");
 		}else {
 			returnElse();
+		}
+	}
+	
+	private void getNumeroSala(InscricaoCandidato candidatoValidado) {
+		if(candidatoValidado.getNumeroSala() != 0) {
+			System.out.println("Numero da Sala: " + candidatoValidado.getNumeroSala());
 		}
 	}
 	
@@ -83,6 +90,7 @@ public class InscricoesCandidatos {
 		InscricaoCandidato candidatoValidado = validarInscricao(numero);
 		if(candidatoValidado != null) {
 			candidatoValidado.setSituacao(SituacaoInscricao.PAGO);
+			criarSalas();
 			System.out.println("==========================================");
 			System.out.println("Boleto pago  com Sucesso!!");
 			System.out.println("==========================================");
@@ -91,7 +99,7 @@ public class InscricoesCandidatos {
 		}
 	}
 	
-	public InscricaoCandidato validarInscricao(int numero) {
+	private InscricaoCandidato validarInscricao(int numero) {
 		for(InscricaoCandidato c : candidatos) {
 			if(numero == c.getNumeroInscricao()) {
 				return c;
@@ -100,16 +108,35 @@ public class InscricoesCandidatos {
 		return null;
 	}
 	
-	public void returnElse() {
+	private void returnElse() {
 		System.out.println("==========================================");
 		System.out.println("Informe um numero de inscrição valido!!");
 		System.out.println("==========================================");
 	}
 	
-	public void returnEdit() {
+	private void returnEdit() {
 		System.out.println("==========================================");
 		System.out.println("Informações editadas com sucesso!!");
 		System.out.println("==========================================");
+	}
+	
+	private void criarSalas() {
+		for(InscricaoCandidato c : candidatos) {
+			if(c != null && c.getSituacao() == SituacaoInscricao.PAGO) {
+				numeroCandidatos++;
+				if(numeroCandidatos % 30 >= 1) {
+					c.setNumeroSala(1);
+				}else if(numeroCandidatos % 30 >= 2) {
+					c.setNumeroSala(2);
+				}else if(numeroCandidatos % 30 >= 3) {
+					c.setNumeroSala(3);
+				}else if(numeroCandidatos % 30 >= 4) {
+					c.setNumeroSala(4);
+				}else if(numeroCandidatos % 30 >= 5) {
+					c.setNumeroSala(5);
+				}
+			}
+		}
 	}
 	
 }

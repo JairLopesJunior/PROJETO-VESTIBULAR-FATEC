@@ -7,6 +7,7 @@ public class InscricaoCandidato {
 	private String cpf;
 	private OpcaoCursos opcao;
 	private SituacaoInscricao situacao;
+	private int numeroSala;
 	
 	public InscricaoCandidato(int numeroInscricao) {
 		this.numeroInscricao = numeroInscricao;
@@ -42,5 +43,14 @@ public class InscricaoCandidato {
 	public void setSituacao(SituacaoInscricao situacao) {
 		this.situacao = situacao;
 	}
+
+	public int getNumeroSala() {
+		return numeroSala;
+	}
+
+	public void setNumeroSala(int numeroSala) {
+		this.numeroSala = numeroSala;
+	}
+	
 
 }
