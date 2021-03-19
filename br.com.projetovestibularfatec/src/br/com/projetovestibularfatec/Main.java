@@ -22,6 +22,7 @@ public class Main {
 			System.out.println("5. Cadastrar aplicadores das provas:");
 			System.out.println("6. Verificar numero de salas necessárias para o vestibular:");
 			System.out.println("7. Verificar lista dos candidatos por salas: OBS: Somente os Efetivados");
+			System.out.println("8. Relação de Candidatos por vagas:");
 			System.out.println("0. SAIR");
 			opcao = scan.nextInt();
 			
@@ -53,6 +54,10 @@ public class Main {
 			
 			if(opcao == 7) {
 				ics.listaCandidatosSala();
+			}
+			
+			if(opcao == 8) {
+				ics.relacaoCandidato();
 			}
 			
 		}while(opcao != 0); {
