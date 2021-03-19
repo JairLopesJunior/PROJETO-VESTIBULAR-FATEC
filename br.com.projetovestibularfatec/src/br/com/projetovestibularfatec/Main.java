@@ -20,6 +20,7 @@ public class Main {
 			System.out.println("3. Listar Candidato:");
 			System.out.println("4. Pagar boleto da Inscrição:");
 			System.out.println("5. Cadastrar aplicadores das provas:");
+			System.out.println("6. Verificar numero de salas necessárias para o vestibular:");
 			System.out.println("0. SAIR");
 			opcao = scan.nextInt();
 			
@@ -43,6 +44,10 @@ public class Main {
 			if(opcao == 5) {
 				Aplicador aplicador = new Aplicador();
 				aplicadores.save(aplicador);
+			}
+			
+			if(opcao == 6) {
+				ics.numeroSala();
 			}
 			
 		}while(opcao != 0); {

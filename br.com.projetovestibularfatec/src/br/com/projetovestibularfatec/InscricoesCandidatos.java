@@ -9,6 +9,7 @@ public class InscricoesCandidatos {
 	List<InscricaoCandidato> candidatos = new ArrayList<>();
 	Scanner scan = new Scanner(System.in);
 	int numeroCandidatos = 0;
+	int contar = 0;
 	
 	public void save(InscricaoCandidato inscricaoCandidato) {
 		System.out.println("Informe o seu nome:");
@@ -139,4 +140,27 @@ public class InscricoesCandidatos {
 		}
 	}
 	
+	public void numeroSala(){
+		candidatos.stream().forEach(c -> {
+			if(c.getSituacao() == SituacaoInscricao.PAGO) {
+				contar++;
+			}
+		});
+		if(contar > 0 && contar <= 30) {
+			System.out.println("Numero de salas: " + 1);
+		}else if(contar > 29) {
+			System.out.println("Numero de salas: " + 2);
+		}else if(contar > 59) {
+			System.out.println("Numero de salas: " + 3);
+		}else if(contar > 89) {
+			System.out.println("Numero de salas: " + 4);
+		}else if(contar > 119) {
+			System.out.println("Numero de salas: " + 5);
+		}else {
+			System.out.println("============================================================");
+			System.out.println("Numero de candidatos insuficiente para ocupar uma sala!!");
+			System.out.println("============================================================");
+		}
+	}
+
 }
