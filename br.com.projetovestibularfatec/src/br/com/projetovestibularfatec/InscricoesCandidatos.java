@@ -186,30 +186,60 @@ public class InscricoesCandidatos {
 	}
 	
 	public void relacaoCandidato(){
-		System.out.println("Informe o numero do Curso: Ex: 1. SISTEMAS_PARA_INTERNET e 2. GESTAO_EMPRESARIAL");
-		int curso = scan.nextInt();
-		if(curso == 1) {
-			System.out.println("============================================================");
-			Long numeroDeCandidatos = candidatos
-					.stream()
-					.filter(c -> 
-						c.getOpcao().equals(OpcaoCursos.SISTEMAS_PARA_INTERNET))
-					.count();
-			System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
-			System.out.println("============================================================");
-		}else if(curso == 2) {
-			System.out.println("============================================================");
-			Long numeroDeCandidatos = candidatos
-					.stream()
-					.filter(c -> 
-						c.getOpcao().equals(OpcaoCursos.GESTAO_EMPRESARIAL))
-					.count();
-			System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
-			System.out.println("============================================================");
-		}else {
-			System.out.println("============================================================");
-			System.out.println("Numero incorreto, por favor informe novamente!!");
-			System.out.println("============================================================");
+		System.out.println("Escolha uma opção: 1. Todas as inscrições ou 2. Somente as inscrições efetivadas");
+		int opcao = scan.nextInt();
+		if(opcao == 1) {
+			System.out.println("Informe o numero do Curso: Ex: 1. SISTEMAS_PARA_INTERNET ou 2. GESTAO_EMPRESARIAL");
+			int curso = scan.nextInt();
+			if(curso == 1) {
+				System.out.println("============================================================");
+				Long numeroDeCandidatos = candidatos
+						.stream()
+						.filter(c -> 
+							c.getOpcao().equals(OpcaoCursos.SISTEMAS_PARA_INTERNET))
+						.count();
+				System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
+				System.out.println("============================================================");
+			}else if(curso == 2) {
+				System.out.println("============================================================");
+				Long numeroDeCandidatos = candidatos
+						.stream()
+						.filter(c -> 
+							c.getOpcao().equals(OpcaoCursos.GESTAO_EMPRESARIAL))
+						.count();
+				System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
+				System.out.println("============================================================");
+			}else {
+				System.out.println("============================================================");
+				System.out.println("Numero incorreto, por favor informe novamente!!");
+				System.out.println("============================================================");
+			}
+		}else if(opcao == 2){
+			System.out.println("Informe o numero do Curso: Ex: 1. SISTEMAS_PARA_INTERNET ou 2. GESTAO_EMPRESARIAL");
+			int curso = scan.nextInt();
+			if(curso == 1) {
+				System.out.println("============================================================");
+				Long numeroDeCandidatos = candidatos
+						.stream()
+						.filter(c -> 
+							c.getOpcao().equals(OpcaoCursos.SISTEMAS_PARA_INTERNET) && c.getSituacao().equals(SituacaoInscricao.PAGO))
+						.count();
+				System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
+				System.out.println("============================================================");
+			}else if(curso == 2) {
+				System.out.println("============================================================");
+				Long numeroDeCandidatos = candidatos
+						.stream()
+						.filter(c -> 
+							c.getOpcao().equals(OpcaoCursos.GESTAO_EMPRESARIAL) && c.getSituacao().equals(SituacaoInscricao.PAGO))
+						.count();
+				System.out.println("O numero da relação de candidatos por vagas é: " + (numeroDeCandidatos.doubleValue() / 40));
+				System.out.println("============================================================");
+			}else {
+				System.out.println("============================================================");
+				System.out.println("Numero incorreto, por favor informe novamente!!");
+				System.out.println("============================================================");
+			}
 		}
 	}
 
