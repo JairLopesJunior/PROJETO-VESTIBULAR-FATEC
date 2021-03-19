@@ -89,11 +89,11 @@ public class InscricoesCandidatos {
 		System.out.println("Informe o numero da sua inscrição:");
 		int numero = scan.nextInt();
 		InscricaoCandidato candidatoValidado = validarInscricao(numero);
-		if(candidatoValidado != null) {
+		if(candidatoValidado != null && !candidatoValidado.getSituacao().equals(SituacaoInscricao.PAGO)) {
 			candidatoValidado.setSituacao(SituacaoInscricao.PAGO);
 			criarSalas();
 			System.out.println("==========================================");
-			System.out.println("Boleto pago  com Sucesso!!");
+			System.out.println("Boleto pago com Sucesso!!");
 			System.out.println("==========================================");
 		}else {
 			returnElse();
@@ -123,7 +123,7 @@ public class InscricoesCandidatos {
 	
 	private void criarSalas() {
 		for(InscricaoCandidato c : candidatos) {
-			if(c != null && c.getSituacao() == SituacaoInscricao.PAGO) {
+			if(c != null && c.getSituacao().equals(SituacaoInscricao.PAGO)) {
 				numeroCandidatos++;
 				if(numeroCandidatos % 30 >= 1) {
 					c.setNumeroSala(1);
@@ -142,7 +142,7 @@ public class InscricoesCandidatos {
 	
 	public void numeroSala(){
 		candidatos.stream().forEach(c -> {
-			if(c.getSituacao() == SituacaoInscricao.PAGO) {
+			if(c.getSituacao().equals(SituacaoInscricao.PAGO)) {
 				contar++;
 			}
 		});
@@ -159,6 +159,28 @@ public class InscricoesCandidatos {
 		}else {
 			System.out.println("============================================================");
 			System.out.println("Numero de candidatos insuficiente para ocupar uma sala!!");
+			System.out.println("============================================================");
+		}
+	}
+	
+	public void listaCandidatosSala(){
+		System.out.println("Informe o numero da sala:");
+		int numSala = scan.nextInt();
+		if(numSala >= 1 || numSala <= 5) {
+			for(InscricaoCandidato c : candidatos) {
+				if(c.getSituacao().equals(SituacaoInscricao.PAGO) && c.getNumeroSala() == numSala) {
+					System.out.println("============Nomes dos Candidatos============");
+					System.out.println("Nome: " + c.getNome());
+					System.out.println("==========================================");
+				}else {
+					System.out.println("============================================================");
+					System.out.println("Nenhum candidato confirmado para este vestibular!!");
+					System.out.println("============================================================");
+				}
+			}
+		}else {
+			System.out.println("============================================================");
+			System.out.println("Numero de sala incorreto, por favor informe um numero valido!!");
 			System.out.println("============================================================");
 		}
 	}
