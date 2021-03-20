@@ -1,5 +1,8 @@
 package br.com.projetovestibularfatec;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -240,7 +243,53 @@ public class InscricoesCandidatos {
 				System.out.println("Numero incorreto, por favor informe novamente!!");
 				System.out.println("============================================================");
 			}
+		}		
+	}
+	
+	// Gravar todos os Candidatos inscritos em um arquivo TXT com nome INSCRICOES.txt
+	public void gravarInscricoesTxt(){
+		File arquivo = new File("INSCRICOES.txt");
+		try {
+			
+			if(!arquivo.exists()) {
+				arquivo.createNewFile();
+			}
+			
+			FileWriter escreverNoArquivo = new FileWriter(arquivo.getAbsoluteFile());
+			BufferedWriter gravarArquivo = new BufferedWriter(escreverNoArquivo);
+			int i = 1;
+			
+			if(candidatos.isEmpty()) {
+				System.out.println("============================================================");
+				System.out.println("Não existe dados para serem gravados!!");
+				System.out.println("============================================================");
+			}else {
+				for(InscricaoCandidato iC : candidatos) {
+					gravarArquivo.write("============================================================");
+					gravarArquivo.newLine();
+					gravarArquivo.write("Candidato numero " + i++);
+					gravarArquivo.newLine();
+					gravarArquivo.write("Nome: " + iC.getNome());
+					gravarArquivo.newLine();
+					gravarArquivo.write("CPF: " + iC.getCpf());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Numero da Inscrição: " + iC.getNumeroInscricao());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Opção de Curso: " + iC.getOpcao().name());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Situação: " + iC.getSituacao().name());
+					gravarArquivo.newLine();
+				}
+				
+				gravarArquivo.close();
+				System.out.println("============================================================");
+				System.out.println("Arquivo INSCRICOES.txt criado/gravado com sucesso!!");
+				System.out.println("============================================================");
+			}			
+		}catch(Exception e) {
+			e.fillInStackTrace();
 		}
+		
 	}
 
 }

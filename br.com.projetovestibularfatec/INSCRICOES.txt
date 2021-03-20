@@ -1,0 +1,8 @@
+
+============================================================
+Candidato numero 1
+Nome: jair
+CPF: 1
+Numero da Inscrição: 1
+Opção de Curso: SISTEMAS_PARA_INTERNET
+Situação: EM_DIVIDA
