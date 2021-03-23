@@ -23,7 +23,8 @@ public class Main {
 			System.out.println("6. Verificar numero de salas necessárias para o vestibular:");
 			System.out.println("7. Verificar lista dos candidatos por salas: OBS: Somente os Efetivados");
 			System.out.println("8. Relação de Candidatos por vagas:");
-			System.out.println("9. Gravar dados em arquivo TXT.");
+			System.out.println("9. Gravar dados em arquivo TXT (INSCRICOES.TXT).");
+			System.out.println("10. Ler dados do arquivo TXT. (INSCRICOES.TXT)");
 			System.out.println("0. SAIR");
 			opcao = scan.nextInt();
 			
@@ -63,6 +64,10 @@ public class Main {
 			
 			if(opcao == 9) {
 				ics.gravarInscricoesTxt();
+			}
+			
+			if(opcao == 10) {
+				ics.letInscricoesTxt();
 			}
 			
 		}while(opcao != 0); {

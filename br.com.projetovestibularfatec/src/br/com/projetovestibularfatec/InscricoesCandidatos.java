@@ -1,7 +1,9 @@
 package br.com.projetovestibularfatec;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -289,7 +291,31 @@ public class InscricoesCandidatos {
 		}catch(Exception e) {
 			e.fillInStackTrace();
 		}
-		
+	}
+	
+	public void letInscricoesTxt() {
+		try {
+			File a = new File("INSCRICOES.txt");
+			FileReader percorrerArquivo = new FileReader(a);
+			BufferedReader lerArquivo = new BufferedReader(percorrerArquivo);
+			if(!candidatos.isEmpty()) {
+				System.out.println("============================================================");
+				System.out.println("LISTA DE CANDIDATOS ENCONTRADOS");
+				System.out.print("============================================================");
+				while(lerArquivo.ready()) {
+					String linha = lerArquivo.readLine();
+					System.out.println(linha);
+				 }  
+				 lerArquivo.close();
+			}else {
+				System.out.println("============================================================");
+				System.out.println("Nenhum dado encontrado para leitura!!");
+				System.out.println("============================================================");
+			}
+	
+		}catch(Exception e) {
+			
+		}
 	}
 
 }
