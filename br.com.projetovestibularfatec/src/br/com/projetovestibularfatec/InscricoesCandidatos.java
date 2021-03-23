@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InscricoesCandidatos {
 
@@ -146,26 +147,44 @@ public class InscricoesCandidatos {
 	}
 	
 	public void numeroSala(){
+		if(candidatos.isEmpty()) {
+			System.out.println("============================================================");
+			System.out.println("Numero de candidatos insuficiente para ocupar uma sala!!");
+			System.out.println("============================================================");
+			return;
+		}
+		
 		candidatos.stream().forEach(c -> {
 			if(c.getSituacao().equals(SituacaoInscricao.PAGO)) {
 				contar++;
 			}
+			
+			if(contar > 0 && contar <= 30) {
+				System.out.println("============================================================");
+				System.out.println("Numero de salas: " + 1);
+				System.out.println("============================================================");
+			}else if(contar > 29) {
+				System.out.println("============================================================");
+				System.out.println("Numero de salas: " + 2);
+				System.out.println("============================================================");
+			}else if(contar > 59) {
+				System.out.println("============================================================");
+				System.out.println("Numero de salas: " + 3);
+				System.out.println("============================================================");
+			}else if(contar > 89) {
+				System.out.println("============================================================");
+				System.out.println("Numero de salas: " + 4);
+				System.out.println("============================================================");
+			}else if(contar > 119) {
+				System.out.println("============================================================");
+				System.out.println("Numero de salas: " + 5);
+				System.out.println("============================================================");
+			}else {
+				System.out.println("============================================================");
+				System.out.println("Numero de candidatos insuficiente para ocupar uma sala!!");
+				System.out.println("============================================================");
+			}
 		});
-		if(contar > 0 && contar <= 30) {
-			System.out.println("Numero de salas: " + 1);
-		}else if(contar > 29) {
-			System.out.println("Numero de salas: " + 2);
-		}else if(contar > 59) {
-			System.out.println("Numero de salas: " + 3);
-		}else if(contar > 89) {
-			System.out.println("Numero de salas: " + 4);
-		}else if(contar > 119) {
-			System.out.println("Numero de salas: " + 5);
-		}else {
-			System.out.println("============================================================");
-			System.out.println("Numero de candidatos insuficiente para ocupar uma sala!!");
-			System.out.println("============================================================");
-		}
 	}
 	
 	public void listaCandidatosSala(){
@@ -316,6 +335,62 @@ public class InscricoesCandidatos {
 		}catch(Exception e) {
 			
 		}
+	}
+	
+	// 11. Gravar dados somente dos candidatos validados em arquivo TXT (CANDIDATOS.TXT).
+	public void gravarCandidatosTxt() {
+		File arquivo = new File("CANDIDATOS.txt");
+		try {
+			
+			if(!arquivo.exists()) {
+				arquivo.createNewFile();
+			}
+			
+			FileWriter escreverNoArquivo = new FileWriter(arquivo.getAbsoluteFile());
+			BufferedWriter gravarArquivo = new BufferedWriter(escreverNoArquivo);
+			int i = 1;
+			
+			List<InscricaoCandidato> candidatosValidados = buscarCandidatosValidados();
+			if(candidatosValidados.isEmpty()) {
+				System.out.println("============================================================");
+				System.out.println("Não existe dados para serem gravados!!");
+				System.out.println("============================================================");
+			}else {
+				for(InscricaoCandidato iC : candidatosValidados) {
+					gravarArquivo.write("============================================================");
+					gravarArquivo.newLine();
+					gravarArquivo.write("Candidato numero " + i++);
+					gravarArquivo.newLine();
+					gravarArquivo.write("Nome: " + iC.getNome());
+					gravarArquivo.newLine();
+					gravarArquivo.write("CPF: " + iC.getCpf());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Numero da Inscrição: " + iC.getNumeroInscricao());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Opção de Curso: " + iC.getOpcao().name());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Situação: " + iC.getSituacao().name());
+					gravarArquivo.newLine();
+					gravarArquivo.write("Numero da Sala: " + iC.getNumeroSala());
+					gravarArquivo.newLine();
+				}
+				
+				gravarArquivo.close();
+				System.out.println("============================================================");
+				System.out.println("Arquivo CANDIDATOS.txt criado/gravado com sucesso!!");
+				System.out.println("============================================================");
+			}			
+		}catch(Exception e) {
+			e.fillInStackTrace();
+		}
+	}
+	
+	private List<InscricaoCandidato> buscarCandidatosValidados(){
+		List<InscricaoCandidato> listaCandidatosValidados = candidatos
+				  .stream()
+				  .filter(f -> f.getSituacao().equals(SituacaoInscricao.PAGO))
+				  .collect(Collectors.toList());
+		return listaCandidatosValidados;
 	}
 
 }
