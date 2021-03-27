@@ -429,6 +429,80 @@ public class InscricoesCandidatos {
 		}
 	}
 	
+	public void gravarCandidatosAprovados() {
+		File arquivo = new File("APROVADOS.txt");
+		try {
+			
+			if(!arquivo.exists()) {
+				arquivo.createNewFile();
+			}
+			
+			FileWriter escreverNoArquivo = new FileWriter(arquivo.getAbsoluteFile());
+			BufferedWriter gravarArquivo = new BufferedWriter(escreverNoArquivo);
+			int i = 1;
+			int ii = 1;
+			
+			List<InscricaoCandidato> candidatosValidados = getAprovadosSistemas();
+			List<InscricaoCandidato> candidatosValidadoss = getAprovadosGestao();
+			if(candidatosValidados.isEmpty() && candidatosValidadoss.isEmpty()) {
+				System.out.println("============================================================");
+				System.out.println("Não existe dados para serem gravados!!");
+				System.out.println("============================================================");
+			}else {
+				int iS = 0;
+				for(InscricaoCandidato iC : candidatosValidados) {
+					if(iS <= 40) {
+						iS++;
+						gravarArquivo.write("============================================================");
+						gravarArquivo.newLine();
+						gravarArquivo.write("Candidato numero " + i++);
+						gravarArquivo.newLine();
+						gravarArquivo.write("Nome: " + iC.getNome());
+						gravarArquivo.newLine();
+						gravarArquivo.write("CPF: " + iC.getCpf());
+						gravarArquivo.newLine();
+						gravarArquivo.write("Numero da Inscrição: " + iC.getNumeroInscricao());
+						gravarArquivo.newLine();
+						gravarArquivo.write("Opção de Curso: " + iC.getOpcao().name());
+						gravarArquivo.newLine();
+					}
+				}		
+			}		
+			
+			
+			if(candidatosValidados.isEmpty() && candidatosValidadoss.isEmpty()) {
+			}else {
+				int iG = 0;
+				for(InscricaoCandidato iC : candidatosValidadoss) {
+					if(iG <= 40) {
+						iG++;
+						gravarArquivo.write("============================================================");
+						gravarArquivo.newLine();
+						gravarArquivo.write("Candidato numero " + ii++);
+						gravarArquivo.newLine();
+						gravarArquivo.write("Nome: " + iC.getNome());
+						gravarArquivo.newLine();
+						gravarArquivo.write("CPF: " + iC.getCpf());
+						gravarArquivo.newLine();
+						gravarArquivo.write("Numero da Inscrição: " + iC.getNumeroInscricao());
+						gravarArquivo.newLine();
+						gravarArquivo.write("Opção de Curso: " + iC.getOpcao().name());
+						gravarArquivo.newLine();
+					}
+				}
+				
+				gravarArquivo.close();
+			}			
+			if(!candidatosValidados.isEmpty() || !candidatosValidadoss.isEmpty()) {
+				System.out.println("============================================================");
+				System.out.println("Arquivo APROVADOS.txt criado/gravado com sucesso!!");
+				System.out.println("============================================================");
+			}
+		}catch(Exception e) {
+			e.fillInStackTrace();
+		}
+	}
+	
 	private List<InscricaoCandidato> buscarCandidatosValidados(){
 		List<InscricaoCandidato> listaCandidatosValidados = candidatos
 				  .stream()

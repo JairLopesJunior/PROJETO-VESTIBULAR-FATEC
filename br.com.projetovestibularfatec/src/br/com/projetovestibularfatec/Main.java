@@ -27,6 +27,7 @@ public class Main {
 			System.out.println("10. Ler dados do arquivo TXT. (INSCRICOES.TXT)");
 			System.out.println("11. Gravar dados somente dos candidatos validados em arquivo TXT (CANDIDATOS.TXT).");
 			System.out.println("12. Verificar candidatos aprovados pelo Vestibular:");
+			System.out.println("13. Gravar dados somente dos candidatos aprovados em arquivo TXT (APROVADOS.TXT).");
 			System.out.println("0. SAIR");
 			opcao = scan.nextInt();
 			
@@ -80,6 +81,10 @@ public class Main {
 				// Vamos considerar como Aprovados, os quarenta primeiros candidatos que terem com o Boleto PAGO.
 				ics.getCandidatosAprovadosSistemas();
 				ics.getCandidatosAprovadosGestao();
+			}
+			
+			if(opcao == 13) {
+				ics.gravarCandidatosAprovados();
 			}
 			
 		}while(opcao != 0); {
