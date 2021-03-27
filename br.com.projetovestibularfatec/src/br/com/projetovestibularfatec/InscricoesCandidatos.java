@@ -385,10 +385,70 @@ public class InscricoesCandidatos {
 		}
 	}
 	
+	public void getCandidatosAprovadosSistemas() {
+		List<InscricaoCandidato> candidatosAprovados = getAprovadosSistemas();
+		if(!candidatosAprovados.isEmpty()) {
+			int i = 0;
+			for(InscricaoCandidato c : candidatosAprovados){
+				System.out.println("=========================APROVADOS=========================");
+				if(i <= 40) {
+					i++;
+					System.out.println("Nome: " + c.getNome());
+					System.out.println("CPF: " + c.getCpf());
+					System.out.println("Curso " + c.getOpcao());
+				}
+				return;
+			}
+			
+		}else {
+			System.out.println("=========================================================================");
+			System.out.println("Nenhum candidato aprovado de Sistemas para Internet encontrado!!");
+			System.out.println("=========================================================================");
+		}
+	}
+	
+	public void getCandidatosAprovadosGestao() {
+		List<InscricaoCandidato> candidatosAprovados = getAprovadosGestao();
+		if(!candidatosAprovados.isEmpty()) {
+			int i = 0;
+			for(InscricaoCandidato c : candidatosAprovados){
+				System.out.println("=========================APROVADOS=========================");
+				if(i <= 40) {
+					i++;
+					System.out.println("Nome: " + c.getNome());
+					System.out.println("CPF: " + c.getCpf());
+					System.out.println("Curso " + c.getOpcao());
+				}
+				return;
+			}
+			
+		}else {
+			System.out.println("=========================================================================");
+			System.out.println("Nenhum candidato aprovado de Gestão Empresarial encontrado!!");
+			System.out.println("=========================================================================");
+		}
+	}
+	
 	private List<InscricaoCandidato> buscarCandidatosValidados(){
 		List<InscricaoCandidato> listaCandidatosValidados = candidatos
 				  .stream()
 				  .filter(f -> f.getSituacao().equals(SituacaoInscricao.PAGO))
+				  .collect(Collectors.toList());
+		return listaCandidatosValidados;
+	}
+	
+	private List<InscricaoCandidato> getAprovadosSistemas(){
+		List<InscricaoCandidato> listaCandidatosValidados = candidatos
+				  .stream()
+				  .filter(f -> f.getSituacao().equals(SituacaoInscricao.PAGO) && f.getOpcao().equals(OpcaoCursos.SISTEMAS_PARA_INTERNET))
+				  .collect(Collectors.toList());
+		return listaCandidatosValidados;
+	}
+	
+	private List<InscricaoCandidato> getAprovadosGestao(){
+		List<InscricaoCandidato> listaCandidatosValidados = candidatos
+				  .stream()
+				  .filter(f -> f.getSituacao().equals(SituacaoInscricao.PAGO) && f.getOpcao().equals(OpcaoCursos.GESTAO_EMPRESARIAL))
 				  .collect(Collectors.toList());
 		return listaCandidatosValidados;
 	}
